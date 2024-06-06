@@ -118,12 +118,36 @@
                         </div>
                         <form action="registration" method="post" class="register_form">
                            <div class="register__form-inputs">
-                              <input class="reservation__form-input text" type="text" name="surname" placeholder="Surname">
-                              <input class="reservation__form-input text" type="text" name="name" placeholder="Name">
-                              <input class="reservation__form-input text" type="email" name="email" placeholder="Email Address">
-                              <input class="reservation__form-input text" type="text" name="phone" placeholder="Phone Number">
-                              <input class="reservation__form-input text" type="password" name="password" placeholder="Password">
-                              <input class="reservation__form-input text"  type="password" name="confirm_password" placeholder="Confirm Password">
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Enter your surname</div>
+                                 <input class="reservation__form-input text" type="text" name="surname" placeholder="Surname">
+                              </div>
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Enter your name</div>
+                                 <input class="reservation__form-input text" type="text" name="name" placeholder="Name" pattern="^[^0-9]*$">
+                              </div>
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Enter your email</div>
+                                 <input class="reservation__form-input text" type="email" name="email" placeholder="Email Adress">
+                              </div>
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Enter your phone number</div>
+                                 <input class="reservation__form-input text" type="text" name="phone_number" placeholder="+380 (99) 999-99-99" id="phone_number">
+                              </div>
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Enter your password</div>
+                                 <div class="reservation__form-input-passwords">
+                                    <input class="reservation__form-input text" type="password" name="password" id="password" placeholder="Password">
+                                    <span onclick="togglePasswordVisibility('password', 'password-toggle-registration')"><img class="password-toggle-login" src="img/hide_show_passwords/show_password.png" id="password-toggle-registration"></span>
+                                 </div>
+                              </div>
+                              <div class="editfields">
+                                 <div class="subtitle-big edit">Confirm Password</div>
+                                 <div class="reservation__form-input-passwords">
+                                    <input class="reservation__form-input text" type="password" name="confirm_password" id="confirm_password" placeholder="Confirm">
+                                    <span onclick="togglePasswordVisibility('confirm_password', 'confirm-password-toggle-registration')"><img class="password-toggle-login" src="img/hide_show_passwords/show_password.png" id="confirm-password-toggle-registration"></span>
+                                 </div>
+                              </div>
                            </div>
                            <div class="errors">
                               <p class="error-msg message" id="different_passwords">Passwords do not match</p>
@@ -184,6 +208,8 @@
    </div>
    <script src="js/main.min.js"></script>
    <script src="js/register_correct.js"></script>
+   <script src="js/inputmask.js"></script>
+   <script src="js/phoneMask.js"></script>
 </body>
 
 </html>

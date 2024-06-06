@@ -142,7 +142,7 @@
                                             <h6 class="info subtitle">Information</h6>
                                             <div class="center_items">
                                                 <a href="/profile-edit" class="change_profile--info subtext" title="Click here and change your personal data">Change profile data</a>
-                                                <a href="change_password" class="change_profile--info subtext">Change password</a>
+                                                <a href="/change_password" class="change_profile--info subtext">Change password</a>
                                                 <a class="change_profile--info subtext" title="Here you can delete your account">Delete account</a>
                                             </div>
                                         </div>
@@ -171,8 +171,9 @@
                                             <div th:each="reservation, iterStat : ${reservations}">
                                                 <div class="booking__item mb-3" style="margin: 30px 0 10px 0;">
                                                     <h6 class="info subtitle-big" style="color: black" th:text="'Reservation ' + ${iterStat.count}"></h6>
-                                                    <button type="button" class="reservation__profile-delete-button" title="Cancel reservation" id="delete__reservation--btn">&#x2715;</button>
+                                                    <button type="button" class="reservation__profile-delete-button" title="Cancel reservation" onclick="openDeleteModal([[${reservation.id}]])">&#x2715;</button>
                                                 </div>
+                                                <input type="hidden" name="id" th:value="${reservation.id}">
                                                 <div class="row pt-1">
                                                     <div class="col-6 mb-3">
                                                         <h6 class="profile text">Date</h6>
@@ -235,24 +236,19 @@
             </div>
         </footer>
     </div>
-    {% if reservations %}
-    {% for reservation in reservations %}
     <div class="modal" id="delete_reservation" style="display: none;">
         <span class="close" onclick="closeModal()">&times;</span>
         <p class="subtitle">Do you really want to cancel the reservation?</p>
-        <form class="delete__reservation--btns" method="post" action="delete_reservation' reservation.id %}" id="deleteForm">
-            {% csrf_token %}
+        <form class="delete__reservation--btns" method="post" action="/deleteReservation" id="deleteForm">
+            <input type="hidden" name="id" id="deleteReservationId">
             <button class="confirm__delete_reservation subtitle-big" type="submit">Yes</button>
             <a onclick="closeModal()" class="cancel__delete_reservation subtitle-big">Cancel</a>
         </form>
     </div>
-    {% endfor %}
-    {% endif %}
     <div class="modal" id="delete_account" style="display: none;">
         <span class="close" onclick="closeModal()">&times;</span>
         <p class="subtitle">Do you really want to delete your account?</p>
         <form class="delete__reservation--btns" method="post" id="deleteAccountForm">
-            {% csrf_token %}
             <button class="confirm__delete_reservation subtitle-big" type="submit">Yes</button>
             <a onclick="closeModal()" class="cancel__delete_reservation subtitle-big">Cancel</a>
         </form>
@@ -263,7 +259,6 @@
         <p class="text">Attention, after deleting your account, it will not be possible to restore it</p>
         <form class="delete__reservation--btns" id="deleteAccountFormConfirm" action="delete_account" method="post">
             <div class="login__form-inputs">
-                {% csrf_token %}
                 <div class="editfields">
                     <div class="subtitle-big edit">Enter your password</div>
                     <div class="reservation__form-input-passwords">
@@ -369,6 +364,16 @@
                 }
             });
         });
+    </script>
+    <script>
+        function openDeleteModal(id) {
+            document.getElementById("deleteReservationId").value = id;
+            document.getElementById("delete_reservation").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("delete_reservation").style.display = "none";
+        }
     </script>
 </body>
 

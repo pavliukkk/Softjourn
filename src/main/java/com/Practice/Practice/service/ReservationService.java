@@ -6,4 +6,5 @@ public interface ReservationService {
 
     ReservationFromContact saveReservationContact(ReservationFromContact reservationFromContact);
 
+    boolean deleteReservationById(Long reservationId);
 }

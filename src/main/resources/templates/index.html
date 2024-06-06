@@ -412,12 +412,18 @@
                <div class="text">Welcome! Enter your details and get in touch with restaurant</div>
             </div>
             <form action="login" class="register_form" id="loginForm" method="post">
-               <div class="login__form-inputs">
-                  <input class="reservation__form-input text" type="text" name="username"
-                         placeholder="Email or Phone Number">
-                  <input class="reservation__form-input text" type="password" name="password"
-                         placeholder="Password">
-               </div>
+               <div class="login__form-inputs" id="login_grid">
+                  <div class="editfields">
+                     <div class="subtitle-big edit">{% trans 'Enter your email or phone number' %}</div>
+                     <input class="reservation__form-input text" type="text" name="email" placeholder="{% trans 'Email or Phone Number' %}">
+                  </div>
+                  <div class="editfields">
+                     <div class="reservation__form-input-passwords">
+                        <div class="subtitle-big edit">{% trans 'Enter your password' %}</div>
+                        <input class="reservation__form-input text" type="password" name="password" id="password" placeholder="{% trans 'Password' %}">
+                        <span id="togglePassword"><img class="password-toggle-login" style="top: 65%;" src="{% static 'img/hide_show_passwords/show_password.png' %}"></span>
+                     </div>
+                  </div>
                <div class="errors">
                   <p class="error-msg message" id="no_login">Please enter your login</p>
                   <p class="error-msg message" id="no_password">Please enter your password</p>
@@ -446,6 +452,7 @@
    <script src="js/reservation_form_check.js"></script>
    <script src="js/login_correct.js"></script>
    <script src="js/json_output.js"></script>
+   <script src="js/togglePassword.js"></script>
 </body>
 
 </html>

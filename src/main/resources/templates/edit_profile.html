@@ -124,6 +124,7 @@
                             <form method="post" class="register_form" id="profileEditForm" action="profile-edit">
                                 <input type="file" name="photo" accept="image/*" style="display: none;" id="fileInput" oninput="displaySelectedPhoto(event)" />
                                 <i class="far fa-edit mb-5"></i>
+                                <input type="hidden" name="id" th:value="${user.id}">
                                 <div class="edit_profile__form-inputs">
                                     <div class="editfields">
                                         <div class="subtitle-big edit">Enter your surname</div>
